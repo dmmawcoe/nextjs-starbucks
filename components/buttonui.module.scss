@@ -1,0 +1,12 @@
+@use '../styles/abstracts/vars';
+
+.btn_ui {
+    border: 0;
+    background-color: transparent;
+
+    &.close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+}
