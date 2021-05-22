@@ -11,7 +11,7 @@ export default function Menu({ employees }) {
     return (
         <Layout>
             <Head>
-                <title>Employees | Damyon Maw-Coe</title>
+                <title>Employees | Starbucks</title>
                 <meta name="description" content="A menu page"/>
             </Head>
             <h1>Employees</h1>

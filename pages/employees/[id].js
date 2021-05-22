@@ -4,6 +4,9 @@ import Link from 'next/link'
 import Layout from '../../components/layout'
 import Row from '../../components/row'
 import Col from '../../components/col'
+import Card from '../../components/card'
+import Paragraph from '../../components/paragraph'
+import Section from '../../components/section'
 
 import { getAllPeopleSlugs, getPersonBySlug } from '../../lib/api'
 
@@ -39,7 +42,7 @@ export async function getStaticProps({ params }) {
 
 export default function People({ peopleData }) {
 
-    const { title, featuredImage, content } = peopleData
+    const { title, featuredImage, content, personInformation, relatedLocations } = peopleData
 
     const { sourceUrl, mediaDetails, altText } = featuredImage.node;
 
@@ -62,7 +65,27 @@ export default function People({ peopleData }) {
                 alt={altText}
             />
             <h1>{title}</h1>
+            <Paragraph>{`Contact ${personInformation.jobTitle} ${title}: ${personInformation.emailAddress} `}</Paragraph>
             <div dangerouslySetInnerHTML={{ __html: content }} />
+
+            {relatedLocations.locationsEmployees.map(edge =>{
+                const { title, slug } = edge;
+                const { sourceUrl, mediaDetails, altText } = edge.featuredImage.node;
+                const { width, height } = mediaDetails;
+                return <Link href={`/locations/${slug}`}>
+                    <a>
+                        <Section title={title}>
+                            <Image
+                                src={sourceUrl}
+                                width={width}
+                                height={height}
+                                alt={altText}
+                            />
+                        </Section>
+                    </a>
+                </Link>    
+            })}
+
         </Layout>
     )
 }
